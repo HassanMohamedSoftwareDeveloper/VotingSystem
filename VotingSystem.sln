@@ -9,6 +9,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VotingSystem.Tests", "Votin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SandBox.EFCoe", "SandBox.EFCoe\SandBox.EFCoe.csproj", "{5D7D37CD-42E6-4749-8078-0C14F3980E58}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VotingSystem", "VotingSystem.Core\VotingSystem.csproj", "{87FC2FCC-A440-4241-950D-6C392F973E17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VotingSystem.Application", "Votingsystem.Application\VotingSystem.Application.csproj", "{F7DF9E5D-0BC4-4295-8DA4-1FDD7BE4A8E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VotingSystem.Application.Tests", "VotingSystem.Application.Tests\VotingSystem.Application.Tests.csproj", "{024D79F2-CC14-448B-B0E9-FE28E4E53C22}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6FF1A07E-1867-4825-B5DB-DA489B21FF89}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A5B16346-3B55-4C87-9787-89EDECD0C5CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VotingSystem.Database.Tests", "VotingSystem.Database.Tests\VotingSystem.Database.Tests.csproj", "{6DB1075E-5A46-4923-B279-4EA6765E9D06}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,9 +39,32 @@ Global
 		{5D7D37CD-42E6-4749-8078-0C14F3980E58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D7D37CD-42E6-4749-8078-0C14F3980E58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D7D37CD-42E6-4749-8078-0C14F3980E58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87FC2FCC-A440-4241-950D-6C392F973E17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87FC2FCC-A440-4241-950D-6C392F973E17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87FC2FCC-A440-4241-950D-6C392F973E17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87FC2FCC-A440-4241-950D-6C392F973E17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7DF9E5D-0BC4-4295-8DA4-1FDD7BE4A8E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7DF9E5D-0BC4-4295-8DA4-1FDD7BE4A8E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7DF9E5D-0BC4-4295-8DA4-1FDD7BE4A8E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7DF9E5D-0BC4-4295-8DA4-1FDD7BE4A8E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{024D79F2-CC14-448B-B0E9-FE28E4E53C22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{024D79F2-CC14-448B-B0E9-FE28E4E53C22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{024D79F2-CC14-448B-B0E9-FE28E4E53C22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{024D79F2-CC14-448B-B0E9-FE28E4E53C22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DB1075E-5A46-4923-B279-4EA6765E9D06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DB1075E-5A46-4923-B279-4EA6765E9D06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DB1075E-5A46-4923-B279-4EA6765E9D06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DB1075E-5A46-4923-B279-4EA6765E9D06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1E7EA800-AACF-4850-8735-49ADCE5ECC74} = {A5B16346-3B55-4C87-9787-89EDECD0C5CD}
+		{87FC2FCC-A440-4241-950D-6C392F973E17} = {6FF1A07E-1867-4825-B5DB-DA489B21FF89}
+		{F7DF9E5D-0BC4-4295-8DA4-1FDD7BE4A8E2} = {6FF1A07E-1867-4825-B5DB-DA489B21FF89}
+		{024D79F2-CC14-448B-B0E9-FE28E4E53C22} = {A5B16346-3B55-4C87-9787-89EDECD0C5CD}
+		{6DB1075E-5A46-4923-B279-4EA6765E9D06} = {A5B16346-3B55-4C87-9787-89EDECD0C5CD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C1DBC89-D1F6-4420-BE7B-48997113C50C}

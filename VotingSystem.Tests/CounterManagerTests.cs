@@ -1,4 +1,6 @@
-﻿namespace VotingSystem.Tests;
+﻿using VotingSystem.Models;
+
+namespace VotingSystem.Tests;
 
 public class CounterManagerTests
 {
@@ -98,39 +100,4 @@ public class CounterManagerTests
         Equal(20, counter2.Percent);
 
     }
-}
-public class Counter
-{
-    public string Name { get; set; }
-    public int Count { get; set; }
-    public double Percent { get; set; }
-}
-
-public class CounterManager
-{
-    internal Counter GetStatistics(Counter counter, int totalCount)
-    {
-        counter.Percent = RoundUp(counter.Count * 100.0 / totalCount);
-        return counter;
-    }
-    internal void ResolveExcess(List<Counter> counters)
-    {
-        var totalPercent = counters.Sum(x => x.Percent);
-        if (totalPercent == 100) return;
-        var excess = 100.0 - totalPercent;
-        var highestPercent = counters.Max(x => x.Percent);
-        var highestCounters = counters.Where(x => x.Percent == highestPercent).ToList();
-
-        if (highestCounters.Count == 1)
-        {
-            highestCounters.First().Percent += excess;
-        }
-        else if (highestCounters.Count < counters.Count)
-        {
-            var lowestPercent = counters.Min(x => x.Percent);
-            var lowestCounter = counters.First(x => x.Percent == lowestPercent);
-            lowestCounter.Percent = RoundUp(lowestCounter.Percent + excess);
-        }
-    }
-    private static double RoundUp(double number) => Math.Round(number, 2);
 }
