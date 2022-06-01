@@ -1,25 +1,20 @@
 ﻿namespace VotingSystem.Tests;
 
-public class CounterTests
+public class CounterManagerTests
 {
     public const string CounterName = "Counter Name";
     public Counter _counter = new Counter() { Name = CounterName, Count = 5 };
-    [Fact]
-    public void HasName()
-    {
-        Equal(CounterName, _counter.Name);
-    }
 
     [Fact]
     public void GetStatistics_IncludesCounterName()
     {
-        var statistics = _counter.GetStatistics(5);
+        var statistics = new CounterManager().GetStatistics(_counter, 5);
         Equal(CounterName, statistics.Name);
     }
     [Fact]
     public void GetStatistics_IncludesCounterCount()
     {
-        var statistics = _counter.GetStatistics(5);
+        var statistics = new CounterManager().GetStatistics(_counter, 5);
         Equal(5, statistics.Count);
     }
 
@@ -31,7 +26,7 @@ public class CounterTests
     public void GetStatistics_ShowsPercentageUpToTwoDecimalsBasedOnTotalcount(int count, int total, double expected)
     {
         _counter.Count = count;
-        var statistics = _counter.GetStatistics(total);
+        var statistics = new CounterManager().GetStatistics(_counter, total);
 
         Equal(expected, statistics.Percent);
     }
@@ -39,9 +34,9 @@ public class CounterTests
     [Fact]
     public void ResolveExcess_DoenotAddExcessWhenAllCountersAreEqual()
     {
-        var counter1 = new Counter {  Percent = 33.33 };
-        var counter2 = new Counter {  Percent = 33.33 };
-        var counter3 = new Counter {  Percent = 33.33 };
+        var counter1 = new Counter { Percent = 33.33 };
+        var counter2 = new Counter { Percent = 33.33 };
+        var counter3 = new Counter { Percent = 33.33 };
         var counters = new List<Counter>() { counter1, counter2, counter3 };
 
         new CounterManager().ResolveExcess(counters);
@@ -51,13 +46,13 @@ public class CounterTests
     }
 
     [Theory]
-    [InlineData(66.67,66.67,33.33)]
-    [InlineData(66.65,66.67,33.33)]
-    [InlineData(66.66,66.68,33.32)]
-    public void ResolveExcess_AddExcessToHighestCounter(double initial ,double expected,double lowest)
+    [InlineData(66.67, 66.67, 33.33)]
+    [InlineData(66.65, 66.67, 33.33)]
+    [InlineData(66.66, 66.68, 33.32)]
+    public void ResolveExcess_AddExcessToHighestCounter(double initial, double expected, double lowest)
     {
-        var counter1 = new Counter {  Percent = initial };
-        var counter2 = new Counter {  Percent = lowest };
+        var counter1 = new Counter { Percent = initial };
+        var counter2 = new Counter { Percent = lowest };
         var counters = new List<Counter>() { counter1, counter2 };
 
         new CounterManager().ResolveExcess(counters);
@@ -75,14 +70,14 @@ public class CounterTests
     }
 
     [Theory]
-    [InlineData(11.11,11.12, 44.44)]
-    [InlineData(11.10,11.12, 44.44)]
-    public void ResolveExcess_AddExcessToLowestCounterWhenMoreThanOneHighestCounters(double initial,double expected,double highest)
+    [InlineData(11.11, 11.12, 44.44)]
+    [InlineData(11.10, 11.12, 44.44)]
+    public void ResolveExcess_AddExcessToLowestCounterWhenMoreThanOneHighestCounters(double initial, double expected, double highest)
     {
-        var counter1 = new Counter {  Percent = highest };
-        var counter2 = new Counter {  Percent = highest };
-        var counter3 = new Counter {  Percent = initial };
-        var counters = new List<Counter>() { counter1, counter2 ,counter3};
+        var counter1 = new Counter { Percent = highest };
+        var counter2 = new Counter { Percent = highest };
+        var counter3 = new Counter { Percent = initial };
+        var counters = new List<Counter>() { counter1, counter2, counter3 };
 
         new CounterManager().ResolveExcess(counters);
         Equal(highest, counter1.Percent);
@@ -94,8 +89,8 @@ public class CounterTests
     [Fact]
     public void ResolveExcess_DoesnotAddExcessIfTotalPercentIs100()
     {
-        var counter1 = new Counter {  Percent = 80 };
-        var counter2 = new Counter {  Percent = 20 };
+        var counter1 = new Counter { Percent = 80 };
+        var counter2 = new Counter { Percent = 20 };
         var counters = new List<Counter>() { counter1, counter2 };
 
         new CounterManager().ResolveExcess(counters);
@@ -109,16 +104,15 @@ public class Counter
     public string Name { get; set; }
     public int Count { get; set; }
     public double Percent { get; set; }
-
-    internal Counter GetStatistics(int totalCount)
-    {
-        Percent = CounterManager.RoundUp(Count * 100.0 / totalCount);
-        return this;
-    }
 }
 
 public class CounterManager
 {
+    internal Counter GetStatistics(Counter counter, int totalCount)
+    {
+        counter.Percent = RoundUp(counter.Count * 100.0 / totalCount);
+        return counter;
+    }
     internal void ResolveExcess(List<Counter> counters)
     {
         var totalPercent = counters.Sum(x => x.Percent);
@@ -135,8 +129,8 @@ public class CounterManager
         {
             var lowestPercent = counters.Min(x => x.Percent);
             var lowestCounter = counters.First(x => x.Percent == lowestPercent);
-            lowestCounter.Percent =RoundUp(lowestCounter.Percent + excess);
+            lowestCounter.Percent = RoundUp(lowestCounter.Percent + excess);
         }
     }
-    public static double RoundUp(double number) => Math.Round(number, 2);
+    private static double RoundUp(double number) => Math.Round(number, 2);
 }
