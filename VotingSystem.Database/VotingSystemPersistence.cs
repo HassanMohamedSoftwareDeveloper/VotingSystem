@@ -1,4 +1,5 @@
-﻿using VotingSystem.Application;
+﻿using Microsoft.EntityFrameworkCore;
+using VotingSystem.Application;
 using VotingSystem.Models;
 
 namespace VotingSystem.Database;
@@ -10,6 +11,24 @@ public class VotingSystemPersistence : IVotingSystemPersistence
     public VotingSystemPersistence(AppDbContext context)
     {
         _context = context;
+    }
+
+    public VotingPoll GetPoll(int pollId)
+    {
+        return _context.VotingPolls
+            .Include(x => x.Counters)
+            .Where(x => EF.Property<int>(x, "Id") == pollId)
+            .Select(poll => new VotingPoll
+            {
+                Title = poll.Title,
+                Description = poll.Description,
+                Counters = poll.Counters.Select(y => new Counter
+                {
+                    Name = y.Name,
+                    Count = y.Votes.Count,
+                }).ToList(),
+            })
+            .FirstOrDefault();
     }
 
     public void SaveVote(Vote vote)

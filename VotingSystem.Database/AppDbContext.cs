@@ -16,6 +16,8 @@ public class AppDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Counter>().Property<int>("Id");
+        modelBuilder.Entity<Counter>().Ignore(x=>x.Count);
+
         modelBuilder.Entity<VotingPoll>().Property<int>("Id");
         modelBuilder.Entity<Vote>().Property<int>("Id");
     }
