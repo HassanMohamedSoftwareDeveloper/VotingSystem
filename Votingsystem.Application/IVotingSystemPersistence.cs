@@ -5,5 +5,7 @@ namespace VotingSystem.Application;
 public interface IVotingSystemPersistence
 {
     void SaveVotingPoll(VotingPoll votingPoll);
+    void SaveVote(Vote vote);
+    bool VoteExists(Vote vote);
 }
 

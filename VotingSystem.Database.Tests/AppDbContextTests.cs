@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using VotingSystem.Database.Tests.Infrastructure;
+﻿using VotingSystem.Database.Tests.Infrastructure;
 using VotingSystem.Models;
 
 namespace VotingSystem.Database.Tests;
@@ -40,21 +39,5 @@ public class AppDbContextTests
             var savedPoll = ctx.VotingPolls.Single();
             Equal(poll.Title, savedPoll.Title);
         }
-    }
-}
-
-public class AppDbContext : DbContext
-{
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-    {
-    }
-
-    public DbSet<Counter> Counters { get; set; }
-    public DbSet<VotingPoll> VotingPolls { get;set; }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<Counter>().Property<int>("Id");
-        modelBuilder.Entity<VotingPoll>().Property<int>("Id");
     }
 }

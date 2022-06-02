@@ -41,19 +41,67 @@ public class VotingSystemPersistenceTests
         }
 
     }
-}
 
-public class VotingSystemPersistence : IVotingSystemPersistence
-{
-    private readonly AppDbContext _context;
-
-    public VotingSystemPersistence(AppDbContext context)
+    [Fact]
+    public void PersistVote()
     {
-        _context = context;
+        var vote = new Vote
+        {
+           UserId="user",
+           CounterId=1
+        };
+        using (var ctx = DbContextFactory.Create(nameof(PersistVote)))
+        {
+           var persistence= new VotingSystemPersistence(ctx);
+            persistence.SaveVote(vote);
+        }
+
+        using (var ctx = DbContextFactory.Create(nameof(PersistVote)))
+        {
+            var savedVote = ctx.Votes.Single();
+            Equal(vote.UserId, savedVote.UserId);
+            Equal(vote.CounterId, savedVote.CounterId);
+        }
+
     }
-    public void SaveVotingPoll(VotingPoll votingPoll)
+
+    [Fact]
+    public void VoteExists_ReturnsFalseWhenNoVote()
     {
-        _context.VotingPolls.Add(votingPoll);
-        _context.SaveChanges();
+
+        var vote = new Vote
+        {
+            UserId = "user",
+            CounterId = 1
+        };
+
+        using (var ctx = DbContextFactory.Create(nameof(VoteExists_ReturnsFalseWhenNoVote)))
+        {
+            var persistence = new VotingSystemPersistence(ctx);
+            False(persistence.VoteExists(vote));
+        }
+
+    }
+
+    [Fact]
+    public void VoteExists_ReturnsTrueWhenVoteExists()
+    {
+
+        var vote = new Vote
+        {
+            UserId = "user",
+            CounterId = 1
+        };
+        using (var ctx = DbContextFactory.Create(nameof(VoteExists_ReturnsTrueWhenVoteExists)))
+        {
+            var persistence = new VotingSystemPersistence(ctx);
+            persistence.SaveVote(vote);
+        }
+        using (var ctx = DbContextFactory.Create(nameof(VoteExists_ReturnsTrueWhenVoteExists)))
+        {
+            var persistence = new VotingSystemPersistence(ctx);
+            True(persistence.VoteExists(vote));
+        }
+
     }
 }
