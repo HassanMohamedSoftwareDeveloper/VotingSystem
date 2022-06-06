@@ -1,0 +1,20 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<h1>Razor index page</h1>
+@foreach (var poll in Model.VotingPolls)
+{
+    <a asp-page="/Poll" asp-route-id="@poll.Id">@poll.Title</a>
+}
+
+<form method="post">
+    <input asp-for="Form.Title" />
+    <input asp-for="Form.Description" />
+    <input asp-for="Form.Names[0]" />
+    <input asp-for="Form.Names[1]" />
+    <input asp-for="Form.Names[2]" />
+    <button type="submit">Submit</button>
+</form>

@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using VotingSystem.Application;
 using VotingSystem.Database.Tests.Infrastructure;
 using VotingSystem.Models;
 
@@ -137,11 +136,13 @@ public class VotingSystemPersistenceTests
 
             var counter1 = savedPoll.Counters[0];
 
+            Equal(1, counter1.Id);
             Equal("One", counter1.Name);
             Equal(2, counter1.Count);
 
             var counter2 = savedPoll.Counters[1];
 
+            Equal(2, counter2.Id);
             Equal("Two", counter2.Name);
             Equal(1, counter2.Count);
         }

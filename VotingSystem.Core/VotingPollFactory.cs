@@ -2,7 +2,7 @@
 
 namespace VotingSystem;
 
-public class VotingPollFactory
+public class VotingPollFactory : IVotingPollFactory
 {
     public class Request
     {

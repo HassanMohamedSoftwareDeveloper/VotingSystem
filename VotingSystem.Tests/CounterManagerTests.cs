@@ -5,8 +5,15 @@ namespace VotingSystem.Tests;
 public class CounterManagerTests
 {
     public const string CounterName = "Counter Name";
-    public Counter _counter = new Counter() { Name = CounterName, Count = 5 };
+    public const int CounterId = 1;
+    public Counter _counter = new Counter() {Id=CounterId, Name = CounterName, Count = 5 };
 
+    [Fact]
+    public void GetStatistics_IncludesCounterId()
+    {
+        var statistics = new CounterManager().GetStatistics(new[] { _counter }).First();
+        Equal(CounterId, statistics.Id);
+    }
     [Fact]
     public void GetStatistics_IncludesCounterName()
     {
@@ -25,6 +32,7 @@ public class CounterManagerTests
     [InlineData(1, 3, 33.33)]
     [InlineData(2, 3, 66.67)]
     [InlineData(2, 8, 25)]
+    [InlineData(0, 0, 0)]
     public void GetStatistics_ShowsPercentageUpToTwoDecimalsBasedOnTotalcount(int count, int total, double expected)
     {
         _counter.Count = count;
@@ -34,18 +42,20 @@ public class CounterManagerTests
         Equal(expected, statistics.Percent);
     }
 
-    [Fact]
-    public void ResolveExcess_DoenotAddExcessWhenAllCountersAreEqual()
+    [Theory]
+    [InlineData(0)]
+    [InlineData(33.33)]
+    public void ResolveExcess_DoenotAddExcessWhenAllCountersAreEqual(double percent)
     {
-        var counter1 = new CounterStatistics { Percent = 33.33 };
-        var counter2 = new CounterStatistics { Percent = 33.33 };
-        var counter3 = new CounterStatistics { Percent = 33.33 };
+        var counter1 = new CounterStatistics { Percent = percent };
+        var counter2 = new CounterStatistics { Percent = percent };
+        var counter3 = new CounterStatistics { Percent = percent };
         var counters = new List<CounterStatistics>() { counter1, counter2, counter3 };
 
         new CounterManager().ResolveExcess(counters);
-        Equal(33.33, counter1.Percent);
-        Equal(33.33, counter2.Percent);
-        Equal(33.33, counter3.Percent);
+        Equal(percent, counter1.Percent);
+        Equal(percent, counter2.Percent);
+        Equal(percent, counter3.Percent);
     }
 
     [Theory]

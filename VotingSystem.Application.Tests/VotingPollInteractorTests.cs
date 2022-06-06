@@ -1,5 +1,4 @@
 ﻿using Moq;
-using VotingSystem.Application;
 using VotingSystem.Models;
 
 namespace VotingSystem.Application.Tests;

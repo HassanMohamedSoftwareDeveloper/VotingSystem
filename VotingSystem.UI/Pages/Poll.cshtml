@@ -1,0 +1,16 @@
+﻿@page "{id}"
+@model VotingSystem.UI.Pages.PollModel
+@{
+}
+<div>
+    <h1>@Model.Statistics.Title</h1>
+    <h1>@Model.Statistics.Description</h1>
+    @foreach (var counter in Model.Statistics.Counters)
+    {
+        <p>@counter.Name - @counter.Count - @counter.Percent%</p>
+        <form method="post">
+            <input type="hidden" name="counterId" value="@counter.Id" />
+            <button type="submit">Vote</button>
+        </form>
+    }
+</div>

@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using VotingSystem.Application;
 using VotingSystem.Models;
 
 namespace VotingSystem.Database;
@@ -24,6 +23,7 @@ public class VotingSystemPersistence : IVotingSystemPersistence
                 Description = poll.Description,
                 Counters = poll.Counters.Select(y => new Counter
                 {
+                    Id=y.Id,
                     Name = y.Name,
                     Count = y.Votes.Count,
                 }).ToList(),

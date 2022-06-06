@@ -9,9 +9,10 @@ public class CounterManager : ICounterManager
         var totalCount = counters.Sum(x => x.Count);
         return counters.Select(x => new CounterStatistics
         {
+            Id=x.Id,
             Name = x.Name,
             Count = x.Count,
-            Percent = RoundUp(x.Count * 100.0 / totalCount),
+            Percent =totalCount>0? RoundUp(x.Count * 100.0 / totalCount):0,
         }).ToList();
     }
 
