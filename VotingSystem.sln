@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VotingSystem.Database", "Vo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VotingSystem.UI", "VotingSystem.UI\VotingSystem.UI.csproj", "{93E9CBCD-6F12-4A8C-B32E-DCD0E1846737}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VotingSystem.Integration.Tests", "VotingSystem.Integration.Tests\VotingSystem.Integration.Tests.csproj", "{1608E922-1481-43CD-AC06-1187B2632DD0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{93E9CBCD-6F12-4A8C-B32E-DCD0E1846737}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93E9CBCD-6F12-4A8C-B32E-DCD0E1846737}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93E9CBCD-6F12-4A8C-B32E-DCD0E1846737}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1608E922-1481-43CD-AC06-1187B2632DD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1608E922-1481-43CD-AC06-1187B2632DD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1608E922-1481-43CD-AC06-1187B2632DD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1608E922-1481-43CD-AC06-1187B2632DD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,6 +85,7 @@ Global
 		{6DB1075E-5A46-4923-B279-4EA6765E9D06} = {A5B16346-3B55-4C87-9787-89EDECD0C5CD}
 		{B8FAF6FC-7ACD-4FEE-9503-DB6802A5F1CC} = {6FF1A07E-1867-4825-B5DB-DA489B21FF89}
 		{93E9CBCD-6F12-4A8C-B32E-DCD0E1846737} = {6FF1A07E-1867-4825-B5DB-DA489B21FF89}
+		{1608E922-1481-43CD-AC06-1187B2632DD0} = {A5B16346-3B55-4C87-9787-89EDECD0C5CD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C1DBC89-D1F6-4420-BE7B-48997113C50C}
