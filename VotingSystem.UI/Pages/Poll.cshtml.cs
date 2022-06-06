@@ -16,7 +16,7 @@ namespace VotingSystem.UI.Pages
         }
         public IActionResult OnPost(int counterId, [FromServices] VotingInteractor votingInteractor)
         {
-            var email = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
+            var email = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email).Value;
             votingInteractor.Vote(new Vote { CounterId = counterId, UserId = email });
             return Redirect(Request.Path.Value);
         }

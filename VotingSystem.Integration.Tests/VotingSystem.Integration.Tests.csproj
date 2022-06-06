@@ -3,12 +3,14 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.43" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.5" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
@@ -24,6 +26,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Votingsystem.Application\VotingSystem.Application.csproj" />
     <ProjectReference Include="..\VotingSystem.Database.Tests\VotingSystem.Database.Tests.csproj" />
+    <ProjectReference Include="..\VotingSystem.UI\VotingSystem.UI.csproj" />
   </ItemGroup>
 
 </Project>
